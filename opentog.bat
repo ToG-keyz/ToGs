@@ -104,45 +104,24 @@ echo   [TOG] Updating TOG SYSTEM...
 echo  ═══════════════════════════════════════════════════════════════
 echo.
 
-:: Tạo thư mục nếu chưa có
-if not exist "%LOCALAPPDATA%\ToG" mkdir "%LOCALAPPDATA%\ToG"
+powershell -ExecutionPolicy Bypass -Command ^
+"Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat' -OutFile '$env:LOCALAPPDATA\ToG\opentog.bat' -UseBasicParsing"
 
-:: Tạo file update.ps1
-(
-echo $url = "https://raw.githubusercontent.com/tog-keyz/tog-system/main/opentog.bat"
-echo $tempFile = "$env:TEMP\opentog.bat"
-echo Invoke-WebRequest -Uri $url -OutFile $tempFile
-echo if (Test-Path $tempFile) {
-echo     $targetPath = "$env:LOCALAPPDATA\ToG\opentog.bat"
-echo     Copy-Item -Path $tempFile -Destination $targetPath -Force
-echo     Write-Host "[TOG] ✅ Update completed!" -ForegroundColor Green
-echo     Write-Host "[TOG] New version saved to: $targetPath" -ForegroundColor Yellow
-echo     Remove-Item $tempFile -Force
-echo } else {
-echo     Write-Host "[TOG] ❌ Update failed!" -ForegroundColor Red
-echo }
-echo Start-Sleep -Seconds 2
-) > "%LOCALAPPDATA%\ToG\update.ps1"
+if %errorlevel%==0 (
+    color 0A
+    echo.
+    echo  ═══════════════════════════════════════════════════════════════
+    echo   [TOG] Update completed!
+    echo   [TOG] Please restart ToG.
+    echo  ═══════════════════════════════════════════════════════════════
+) else (
+    color 0C
+    echo.
+    echo  ═══════════════════════════════════════════════════════════════
+    echo   [TOG] Update failed!
+    echo  ═══════════════════════════════════════════════════════════════
+)
 
-:: Chạy update script
-powershell -ExecutionPolicy Bypass -File "%LOCALAPPDATA%\ToG\update.ps1"
-
-color 0E
-echo.
-echo  ═══════════════════════════════════════════════════════════════
-echo   [TOG] Update finished!
-echo   [TOG] Restart TOG to use new version
-echo  ═══════════════════════════════════════════════════════════════
 color 0F
-timeout /t 2 >nul
-goto menu
-
-:end
-color 0E
-echo.
-echo  ═══════════════════════════════════════════════════════════════
-echo  TOG SYSTEM - Goodbye! 👋
-echo  ═══════════════════════════════════════════════════════════════
-color 0F
-timeout /t 1 >nul
+pause
 exit
