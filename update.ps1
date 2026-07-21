@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 
 $InstallDir = "$env:LOCALAPPDATA\ToG"
 $TargetFile = Join-Path $InstallDir "opentog.bat"
-$DownloadUrl = "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat"
+$DownloadUrl = "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentogs.bat"
 
 Write-Host ""
 Write-Host "========================================="
