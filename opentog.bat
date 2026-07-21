@@ -42,19 +42,19 @@ color 0B
 echo     ╔══════════════════════════════════════════════════════════════╗
 
 color 0C
-echo     ║                     TOG SYSTEM v1.0                         ║
+echo     ║                     TOG SYSTEM v1.0                          ║
 
 color 0B
 echo     ╠══════════════════════════════════════════════════════════════╣
-echo     ║  help      Show help                                        ║
+echo     ║  help      Show help                                         ║
 
 color 0C
-echo     ║  version   Show version                                     ║
-echo     ║  update    Update TOG                                       ║
+echo     ║  version   Show version                                      ║
+echo     ║  update    Update TOG                                        ║
 
 color 0B
-echo     ║  cls       Clear screen                                     ║
-echo     ║  exit      Exit                                             ║
+echo     ║  cls       Clear screen                                      ║
+echo     ║  exit      Exit                                              ║
 echo     ╚══════════════════════════════════════════════════════════════╝
 
 color 0F
