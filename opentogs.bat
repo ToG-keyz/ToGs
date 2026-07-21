@@ -26,7 +26,7 @@ echo   [SYSTEM TOG - READY]
 echo  ═══════════════════════════════════════════════════════════════
 timeout /t 0.5 >nul
 
-:: Màu xanh nước biển + đỏ
+:: Màu xanh nước biển + đỏ đan xen
 :header
 cls
 echo.
@@ -41,17 +41,21 @@ color 0C
 echo.
 echo     ████████╗ ██████╗  ██████╗ 
 echo     ╚══██╔══╝██╔═══██╗██╔════╝ 
+color 0B
 echo        ██║   ██║   ██║██║  ███╗
+color 0C
 echo        ██║   ██║   ██║██║   ██║
+color 0B
 echo        ██║   ╚██████╔╝╚██████╔╝
+color 0C
 echo        ╚═╝    ╚═════╝  ╚═════╝ 
 color 0B
 echo.
 echo     ╔═══════════════════════════════════════════════════════════════╗
-echo     ║  TOG SYSTEM V1.0                                             ║
-echo     ║  Type 'help' for commands                                   ║
-echo     ║  Type 'exit' to quit                                        ║
-echo     ║  Type 'update' to update                                    ║
+echo     ║  TOG SYSTEM V1.0                                              ║
+echo     ║  Type 'help' for commands                                     ║
+echo     ║  Type 'exit' to quit                                          ║
+echo     ║  Type 'update' to update                                      ║
 echo     ╚═══════════════════════════════════════════════════════════════╝
 color 0F
 echo.
@@ -109,7 +113,7 @@ if not exist "%LOCALAPPDATA%\ToG" mkdir "%LOCALAPPDATA%\ToG"
 
 :: Tạo file update.ps1
 (
-echo $url = "https://raw.githubusercontent.com/tog-keyz/ToGs/main/opentog.bat"
+echo $url = "https://raw.githubusercontent.com/tog-keyz/ToGs/main/opentogs.bat"
 echo $tempFile = "$env:TEMP\opentog.bat"
 echo Invoke-WebRequest -Uri $url -OutFile $tempFile
 echo if (Test-Path $tempFile) {
