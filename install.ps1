@@ -1,36 +1,9 @@
-# === ToG INSTALLER - BẢN NÂNG CẤP ===
+# === ToG INSTALLER V2 ===
 $ErrorActionPreference = "Stop"
 
 # === CẤU HÌNH ===
 $InstallDir = "$env:APPDATA\ToG"
 $RepoURL = "https://raw.githubusercontent.com/ToG-keyz/ToGs/main"
-
-# === KIỂM TRA UNINSTALL ===
-if ($args[0] -eq "uninstall" -or $args[0] -eq "-u") {
-    Write-Host ""
-    Write-Host "============================================================"
-    Write-Host "              🗑️  UNINSTALLING ToG"
-    Write-Host "============================================================"
-    Write-Host ""
-    
-    # Xóa file
-    Remove-Item -Path "$InstallDir\*" -Force -Recurse -ErrorAction SilentlyContinue
-    Remove-Item -Path "$InstallDir" -Force -ErrorAction SilentlyContinue
-    
-    # Xóa khỏi PATH
-    $UserPath = [Environment]::GetEnvironmentVariable("Path","User")
-    $NewPath = ($UserPath -split ';' | Where-Object {$_ -ne $InstallDir}) -join ';'
-    [Environment]::SetEnvironmentVariable("Path", $NewPath, "User")
-    
-    # Xóa task scheduler
-    schtasks /delete /tn "ToG_Update" /f 2>$null
-    
-    Write-Host ""
-    Write-Host "✅ ToG UNINSTALLED SUCCESSFULLY!" -ForegroundColor Green
-    Write-Host ""
-    Read-Host "Press Enter to exit"
-    exit
-}
 
 # === BẮT ĐẦU CÀI ĐẶT ===
 Write-Host ""
@@ -61,7 +34,7 @@ try {
         Write-Host ""
     }
 
-    # === XÓA FILE CŨ ===
+    # === XÓA FILE CŨ (GIỮ LẠI) ===
     Write-Host "[TOG] Cleaning old files..." -ForegroundColor Yellow
     $FilesToRemove = @(
         "opentog.bat", "opentog_backup.bat", 
@@ -165,10 +138,6 @@ try {
         Write-Host ""
         Write-Host "  🔄 To update ToG, type:" -ForegroundColor Yellow
         Write-Host "     update" -ForegroundColor Green
-        Write-Host ""
-        Write-Host "  🗑️  To uninstall ToG, type:" -ForegroundColor Yellow
-        Write-Host "     update -u" -ForegroundColor Green
-        Write-Host "     (or run this script with -u argument)" -ForegroundColor Cyan
         Write-Host ""
     } else {
         throw "No files were installed!"
