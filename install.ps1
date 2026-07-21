@@ -11,7 +11,7 @@ New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 
 # Tải opentog.bat
 Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat" `
+    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentogs.bat" `
     -OutFile "$InstallDir\opentog.bat"
 
 # Tải update.ps1
@@ -37,5 +37,5 @@ Write-Host "==================================="
 Write-Host ""
 Write-Host "Restart CMD then type:"
 Write-Host ""
-Write-Host "    opentog"
+Write-Host "    opentogs"
 Write-Host ""
