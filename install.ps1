@@ -1,64 +1,48 @@
-$ErrorActionPreference = "Stop"
-
 $InstallDir = "$env:LOCALAPPDATA\ToG"
 
-Write-Host ""
-Write-Host "==================================="
-Write-Host "      Installing ToG..."
-Write-Host "==================================="
-Write-Host ""
-
-try {
-    # Tạo thư mục cài đặt
-    if (!(Test-Path $InstallDir)) {
-        New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-    }
-
-    # Xóa file cũ nếu có
-    if (Test-Path "$InstallDir\opentogs.bat") {
-        Remove-Item "$InstallDir\opentogs.bat" -Force
-    }
-
-    if (Test-Path "$InstallDir\update.ps1") {
-        Remove-Item "$InstallDir\update.ps1" -Force
-    }
-
-    # Tải opentogs.bat
-    Invoke-WebRequest `
-        -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentogs.bat" `
-        -OutFile "$InstallDir\opentogs.bat"
-
-    # Tải update.ps1
-    Invoke-WebRequest `
-        -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/update.ps1" `
-        -OutFile "$InstallDir\update.ps1"
-
-    # Thêm PATH nếu chưa có
-    $UserPath = [Environment]::GetEnvironmentVariable("Path","User")
-
-    if ($UserPath -notlike "*$InstallDir*") {
-        [Environment]::SetEnvironmentVariable(
-            "Path",
-            "$UserPath;$InstallDir",
-            "User"
-        )
-    }
-
-    Write-Host ""
-    Write-Host "==================================="
-    Write-Host "  ToG installed successfully!"
-    Write-Host "==================================="
-    Write-Host ""
-    Write-Host "Restart CMD or PowerShell and run:"
-    Write-Host ""
-    Write-Host "    opentogs"
-    Write-Host ""
-
+# Tạo thư mục
+if (!(Test-Path $InstallDir)) {
+    New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 }
-catch {
-    Write-Host ""
-    Write-Host "==================================="
-    Write-Host "  Installation failed!"
-    Write-Host "==================================="
-    Write-Host $_.Exception.Message
+
+# Tải opentog
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat" `
+    -OutFile "$InstallDir\opentog.bat"
+
+# Tải update
+Invoke-WebRequest `
+    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/update.ps1" `
+    -OutFile "$InstallDir\update.ps1"
+
+# Thêm PATH
+$UserPath = [Environment]::GetEnvironmentVariable("Path","User")
+
+if ([string]::IsNullOrWhiteSpace($UserPath)) {
+    $UserPath = ""
 }
+
+$Paths = $UserPath.Split(';') | ForEach-Object { $_.Trim() }
+
+if ($Paths -notcontains $InstallDir) {
+    $NewPath = if ($UserPath) {
+        "$UserPath;$InstallDir"
+    } else {
+        $InstallDir
+    }
+
+    [Environment]::SetEnvironmentVariable("Path",$NewPath,"User")
+
+    Write-Host "[TOG] PATH added."
+}
+else {
+    Write-Host "[TOG] PATH already exists."
+}
+
+Write-Host ""
+Write-Host "Installation completed."
+Write-Host ""
+Write-Host "Close CMD and open a new CMD."
+Write-Host "Then type:"
+Write-Host ""
+Write-Host "    opentog"
