@@ -1,48 +1,55 @@
-$InstallDir = "$env:LOCALAPPDATA\ToG"
+$ErrorActionPreference = "Stop"
 
-# Tạo thư mục
-if (!(Test-Path $InstallDir)) {
-    New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-}
+$InstallDir = "$env:APPDATA\npm"
 
-# Tải opentog
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat" `
-    -OutFile "$InstallDir\opentog.bat"
+Write-Host ""
+Write-Host "==================================="
+Write-Host "      Installing ToG..."
+Write-Host "==================================="
+Write-Host ""
 
-# Tải update
-Invoke-WebRequest `
-    -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/update.ps1" `
-    -OutFile "$InstallDir\update.ps1"
+try {
 
-# Thêm PATH
-$UserPath = [Environment]::GetEnvironmentVariable("Path","User")
-
-if ([string]::IsNullOrWhiteSpace($UserPath)) {
-    $UserPath = ""
-}
-
-$Paths = $UserPath.Split(';') | ForEach-Object { $_.Trim() }
-
-if ($Paths -notcontains $InstallDir) {
-    $NewPath = if ($UserPath) {
-        "$UserPath;$InstallDir"
-    } else {
-        $InstallDir
+    if (!(Test-Path $InstallDir)) {
+        New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
     }
 
-    [Environment]::SetEnvironmentVariable("Path",$NewPath,"User")
+    if (Test-Path "$InstallDir\opentog.bat") {
+        Remove-Item "$InstallDir\opentog.bat" -Force
+    }
 
-    Write-Host "[TOG] PATH added."
-}
-else {
-    Write-Host "[TOG] PATH already exists."
-}
+    if (Test-Path "$InstallDir\update.ps1") {
+        Remove-Item "$InstallDir\update.ps1" -Force
+    }
 
-Write-Host ""
-Write-Host "Installation completed."
-Write-Host ""
-Write-Host "Close CMD and open a new CMD."
-Write-Host "Then type:"
-Write-Host ""
-Write-Host "    opentog"
+    Invoke-WebRequest `
+        -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentog.bat" `
+        -OutFile "$InstallDir\opentog.bat"
+
+    Invoke-WebRequest `
+        -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/update.ps1" `
+        -OutFile "$InstallDir\update.ps1"
+
+    Write-Host ""
+    Write-Host "==================================="
+    Write-Host "  ToG installed successfully!"
+    Write-Host "==================================="
+    Write-Host ""
+    Write-Host "Install Path:"
+    Write-Host "  $InstallDir"
+    Write-Host ""
+    Write-Host "Open a new CMD and type:"
+    Write-Host ""
+    Write-Host "    opentog"
+    Write-Host ""
+
+}
+catch {
+
+    Write-Host ""
+    Write-Host "==================================="
+    Write-Host "  Installation failed!"
+    Write-Host "==================================="
+    Write-Host $_.Exception.Message
+
+}
