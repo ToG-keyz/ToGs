@@ -12,7 +12,7 @@ New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
 # Tải opentog.bat
 Invoke-WebRequest `
     -Uri "https://raw.githubusercontent.com/ToG-keyz/ToGs/main/opentogs.bat" `
-    -OutFile "$InstallDir\opentog.bat"
+    -OutFile "$InstallDir\opentogs.bat"
 
 # Tải update.ps1
 Invoke-WebRequest `
