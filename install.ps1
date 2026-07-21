@@ -1,8 +1,8 @@
-# === ToG INSTALLER V2 ===
+# === ToG INSTALLER V2 - CÀI VÀO NPM ===
 $ErrorActionPreference = "Stop"
 
 # === CẤU HÌNH ===
-$InstallDir = "$env:APPDATA\ToG"
+$InstallDir = "$env:APPDATA\npm"
 $RepoURL = "https://raw.githubusercontent.com/ToG-keyz/ToGs/main"
 
 # === BẮT ĐẦU CÀI ĐẶT ===
@@ -10,6 +10,8 @@ Write-Host ""
 Write-Host "============================================================"
 Write-Host "              🚀 INSTALLING ToG SYSTEM"
 Write-Host "============================================================"
+Write-Host ""
+Write-Host "  📁 Install Path: $InstallDir"
 Write-Host ""
 
 # === CHECK INTERNET ===
@@ -26,15 +28,18 @@ try {
 Write-Host ""
 
 try {
-    # === TẠO THƯ MỤC ===
+    # === TẠO THƯ MỤC NẾU CHƯA CÓ ===
     if (!(Test-Path $InstallDir)) {
         Write-Host "[TOG] Creating directory: $InstallDir" -ForegroundColor Yellow
         New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
         Write-Host "[TOG] ✅ Directory created!" -ForegroundColor Green
         Write-Host ""
+    } else {
+        Write-Host "[TOG] ✅ Directory already exists: $InstallDir" -ForegroundColor Green
+        Write-Host ""
     }
 
-    # === XÓA FILE CŨ (GIỮ LẠI) ===
+    # === XÓA FILE CŨ ===
     Write-Host "[TOG] Cleaning old files..." -ForegroundColor Yellow
     $FilesToRemove = @(
         "opentog.bat", "opentog_backup.bat", 
@@ -42,12 +47,18 @@ try {
         "tog.bat", "tog_old.bat"
     )
     
+    $RemovedCount = 0
     foreach ($File in $FilesToRemove) {
         $FilePath = Join-Path $InstallDir $File
         if (Test-Path $FilePath) {
             Remove-Item -Path $FilePath -Force
             Write-Host "[TOG] 🗑️  Removed: $File" -ForegroundColor Green
+            $RemovedCount++
         }
+    }
+    
+    if ($RemovedCount -eq 0) {
+        Write-Host "[TOG] ℹ️  No old files to remove." -ForegroundColor Cyan
     }
     Write-Host "[TOG] ✅ Cleanup completed!" -ForegroundColor Green
     Write-Host ""
@@ -61,6 +72,7 @@ try {
         "tog.bat" = "tog.bat"
     }
     
+    $DownloadedCount = 0
     foreach ($File in $Files.Keys) {
         Write-Host "[TOG] 📥 Downloading: $File" -ForegroundColor Cyan
         try {
@@ -69,6 +81,7 @@ try {
                 -OutFile "$InstallDir\$File" `
                 -UseBasicParsing
             Write-Host "[TOG] ✅ Downloaded: $File" -ForegroundColor Green
+            $DownloadedCount++
         } catch {
             Write-Host "[TOG] ⚠️  Failed to download: $File" -ForegroundColor Yellow
         }
@@ -138,6 +151,9 @@ try {
         Write-Host ""
         Write-Host "  🔄 To update ToG, type:" -ForegroundColor Yellow
         Write-Host "     update" -ForegroundColor Green
+        Write-Host ""
+        Write-Host "  📂 To open install folder, type:" -ForegroundColor Yellow
+        Write-Host "     explorer %APPDATA%\npm" -ForegroundColor Cyan
         Write-Host ""
     } else {
         throw "No files were installed!"
