@@ -96,9 +96,6 @@ echo cls        Clear screen
 echo clear      Clear screen
 echo exit       Exit TOG
 echo.
-echo Installation Path:
-echo %APPDATA%\npm
-echo.
 echo Executable:
 echo opentog
 echo.
