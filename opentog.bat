@@ -39,17 +39,17 @@ echo.
 color 0E
 echo  ╔══════════════════════════════════════════════════════════════════╗
 color 0B
-echo  ║                    TOG SYSTEM v2.0                              ║
+echo  ║                    TOG SYSTEM v2.0                               ║
 color 0E
 echo  ╠══════════════════════════════════════════════════════════════════╣
 color 0A
-echo  ║  help      - Show help menu                                     ║
-echo  ║  version   - Show version information                           ║
+echo  ║  help      - Show help menu                                      ║
+echo  ║  version   - Show version information                            ║
 color 0C
-echo  ║  update    - Update TOG SYSTEM                                  ║
+echo  ║  update    - Update TOG SYSTEM                                   ║
 color 0A
-echo  ║  cls       - Clear screen                                       ║
-echo  ║  exit      - Exit TOG SYSTEM                                    ║
+echo  ║  cls       - Clear screen                                        ║
+echo  ║  exit      - Exit TOG SYSTEM                                     ║
 color 0E
 echo  ╚══════════════════════════════════════════════════════════════════╝
 echo.
@@ -73,10 +73,10 @@ if "!cmd!"=="" goto menu
 color 0C
 echo.
 echo  ╔══════════════════════════════════════════════════════════════════╗
-echo  ║                    COMMAND ERROR                                ║
+echo  ║                    COMMAND ERROR                                 ║
 echo  ╠══════════════════════════════════════════════════════════════════╣
-echo  ║  Unknown command: !cmd!                                         ║
-echo  ║  Type "help" to see available commands.                        ║
+echo  ║  Unknown command: !cmd!                                              ║
+echo  ║  Type "help" to see available commands.                          ║
 echo  ╚══════════════════════════════════════════════════════════════════╝
 color 0F
 timeout /t 2 >nul
@@ -109,26 +109,26 @@ cls
 color 0E
 echo.
 echo  ╔══════════════════════════════════════════════════════════════════╗
-echo  ║                    HELP MENU                                    ║
+echo  ║                    HELP MENU                                     ║
 echo  ╠══════════════════════════════════════════════════════════════════╣
 echo  ║                                                                  ║
 color 0B
 echo  ║  COMMANDS:                                                       ║
 echo  ║                                                                  ║
 echo  ║    help       - Show this help menu                              ║
-echo  ║    version    - Show TOG version information                    ║
-echo  ║    update     - Update TOG SYSTEM to latest version             ║
-echo  ║    cls        - Clear screen                                    ║
-echo  ║    clear      - Clear screen (alias)                            ║
-echo  ║    exit       - Exit TOG SYSTEM                                 ║
-echo  ║    opentog    - Run TOG from APPDATA                           ║
+echo  ║    version    - Show TOG version information                     ║
+echo  ║    update     - Update TOG SYSTEM to latest version              ║
+echo  ║    cls        - Clear screen                                     ║
+echo  ║    clear      - Clear screen (alias)                             ║
+echo  ║    exit       - Exit TOG SYSTEM                                  ║
+echo  ║    opentog    - Run TOG from APPDATA                             ║
 echo  ║                                                                  ║
 color 0E
 echo  ║  NOTES:                                                          ║
 echo  ║                                                                  ║
 color 0A
 echo  ║    - Commands are case-insensitive                               ║
-echo  ║    - Press UP arrow to see command history                      ║
+echo  ║    - Press UP arrow to see command history                       ║
 echo  ║                                                                  ║
 color 0E
 echo  ╚══════════════════════════════════════════════════════════════════╝
@@ -141,23 +141,23 @@ cls
 color 0B
 echo.
 echo  ╔══════════════════════════════════════════════════════════════════╗
-echo  ║                    VERSION INFO                                 ║
+echo  ║                    VERSION INFO                                  ║
 echo  ╠══════════════════════════════════════════════════════════════════╣
 echo  ║                                                                  ║
 color 0C
 echo  ║    ████████╗  ██████╗  ██████╗      ███████╗██╗   ██╗███████╗    ║
-echo  ║    ╚══██╔══╝██╔═══██╗██╔════╝      ██╔════╝╚██╗ ██╔╝██╔════╝    ║
-echo  ║       ██║   ██║   ██║██║  ███╗     ███████╗ ╚████╔╝ ███████╗    ║
-echo  ║       ██║   ██║   ██║██║   ██║     ╚════██║  ╚██╔╝  ╚════██║    ║
-echo  ║       ██║   ╚██████╔╝╚██████╔╝     ███████║   ██║   ███████║    ║
-echo  ║       ╚═╝    ╚═════╝  ╚═════╝      ╚══════╝   ╚═╝   ╚══════╝    ║
+echo  ║    ╚══██╔══╝██╔═══██╗██╔════╝      ██╔════╝╚██╗ ██╔╝██╔════╝     ║
+echo  ║       ██║   ██║   ██║██║  ███╗     ███████╗ ╚████╔╝ ███████╗     ║
+echo  ║       ██║   ██║   ██║██║   ██║     ╚════██║  ╚██╔╝  ╚════██║     ║
+echo  ║       ██║   ╚██████╔╝╚██████╔╝     ███████║   ██║   ███████║     ║
+echo  ║       ╚═╝    ╚═════╝  ╚═════╝      ╚══════╝   ╚═╝   ╚══════╝     ║
 echo  ║                                                                  ║
 color 0B
 echo  ║    Package: TOG SYSTEM                                           ║
-echo  ║    Version: v2.0                                                ║
-echo  ║    Author:  ToG                                                 ║
-echo  ║    Release: %date%                                              ║
-echo  ║    Path:    %APPDATA%\npm                                       ║
+echo  ║    Version: v2.0                                                 ║
+echo  ║    Author:  ToG                                                  ║
+echo  ║    Release: %date%                                      ║
+echo  ║    Path:    %APPDATA%\npm                    ║
 echo  ║                                                                  ║
 color 0E
 echo  ╚══════════════════════════════════════════════════════════════════╝
