@@ -56,7 +56,7 @@ echo.
 
 :menu
 set cmd=
-color 0B
+color 0E
 set /p cmd="TOG > "
 
 if /I "!cmd!"=="help" goto help
